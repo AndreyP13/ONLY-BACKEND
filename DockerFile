@@ -1,15 +1,16 @@
-# Usa una imagen de Maven para compilar
+# Etapa de compilación
 FROM maven:3.8.5-openjdk-17 AS build
 WORKDIR /app
-COPY . .
+COPY pom.xml .
+COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Usa una imagen más ligera para correr la app
+# Etapa de ejecución
 FROM openjdk:17-jdk-slim
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/target/*SNAPSHOT.jar app.jar
 
-# Render expone el puerto dinámicamente
+# Render necesita usar PORT como variable dinámica
 ENV PORT=8080
 EXPOSE 8080
 
