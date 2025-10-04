@@ -14,10 +14,6 @@ public class Equipo {
     private int proyectosPersonales;     // Proyectos personales
     private int ocupacion;               // Ocupación %
 
-    // Relación con usuarios
-    @OneToMany(mappedBy = "equipo", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Usuario> usuarios;
-
     // ====== Getters y Setters ======
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -33,7 +29,4 @@ public class Equipo {
 
     public int getOcupacion() { return ocupacion; }
     public void setOcupacion(int ocupacion) { this.ocupacion = ocupacion; }
-
-    public List<Usuario> getUsuarios() { return usuarios; }
-    public void setUsuarios(List<Usuario> usuarios) { this.usuarios = usuarios; }
 }
